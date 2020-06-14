@@ -14,6 +14,7 @@
 
 .profile__info-edit:hover {
   opacity: 0.6;
+  transition: 0.5s ease-in
 }
 
 @media screen and (max-width: 710px){

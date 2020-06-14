@@ -16,4 +16,5 @@
 
 .popup__save:hover {
   background: rgba(0, 0, 0, 0.8);
+  transition: 0.2s linear 0.1s;
 }
