@@ -1,0 +1,10 @@
+@import url(./__pic/element__pic.css);
+@import url(./__content/element__content.css);
+@import url(./__name/element__name.css);
+@import url(./__heart/element__heart.css);
+@import url();
+
+.element {
+  max-width: 100%;
+  width: 100%;
+}

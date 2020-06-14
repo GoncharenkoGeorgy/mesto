@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">    
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="pages/index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mesto</title>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" src="images/Vector.png" alt="Mesto">
+    </header>
+
+    <main class="content">
+      <section class="profile">
+        <div class="profile__content">
+          <img class="profile__avatar" src="images/kusto.png" alt="Жак-Ив Кусто">
+          <div class="profile__info-container">
+            <div class="profile__info">
+              <h1 class="profile__info-heading" id="userName"></h1>
+              <button class="profile__info-edit" id="profileEditButton"></button>     
+            </div>  
+            <p class="profile__info-text" id="userProf"></p>
+          </div>  
+        </div>
+          <button class="profile__add-button"></button>
+        
+      </section>
+
+      <ul class="elements">
+        <li class="element">
+          <img class="element__pic" src="images/karachaevsk.png" alt="Карачаевск">
+          <div class="element__content">
+            <h2 class="element__name">Карачаевск</h2>
+            <img class="element__heart" src="images/heart.png" alt="Лайк">
+          </div>  
+        </li> 
+        <li class="element">
+          <img class="element__pic" src="images/dombai.png" alt="Карачаевск">
+          <div class="element__content">
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <img class="element__heart" src="images/heart.png" alt="Лайк">
+          </div> 
+        </li>
+        <li class="element">
+          <img class="element__pic" src="images/Albrus.png" alt="Карачаевск">
+          <div class="element__content">
+            <h2 class="element__name">Домбай</h2>
+            <img class="element__heart" src="images/heart.png" alt="Лайк">
+          </div> 
+        </li>
+        <li class="element">
+          <img class="element__pic" src="images/dombai.png" alt="Карачаевск">
+          <div class="element__content">
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <img class="element__heart" src="images/heart.png" alt="Лайк">
+          </div>           
+        </li>
+        <li class="element">
+          <img class="element__pic" src="images/Albrus.png" alt="Карачаевск">
+          <div class="element__content">
+            <h2 class="element__name">Домбай</h2>
+            <img class="element__heart" src="images/heart.png" alt="Лайк">
+          </div>           
+        </li>
+        <li class="element">
+          <img class="element__pic" src="images/karachaevsk.png" alt="Карачаевск">
+          <div class="element__content">
+            <h2 class="element__name">Карачаево-Черкессия</h2>
+            <img class="element__heart" src="images/heart.png" alt="Лайк">
+          </div>           
+        </li>
+      </ul> 
+    </main>
+    
+    <footer class="footer">
+      <p class="footer__text">&copy; 2020 Mesto Russia</p>
+    </footer>
+
+    <section class="popup" id="popup">
+      <div class="popup__container">
+        <img class="popup__close" src="images/CloseIcon.png" alt="Закрыть" id="popupClose">
+        <div class="popup__content">
+          <h2 class="popup__heading">Редактировать профиль</h2>
+          <fieldset class="popup__fields">
+            <input class="popup__input" type="text" name="heading" placeholder="Имя" required id="userNameInput">
+            <input class="popup__input" type="text" name="subheading" placeholder="Род деятельности" required id="userProfInput">
+          </fieldset>
+        <button class="popup__save" id="popupSave">Сохранить</button>  
+        </div>  
+      </div>
+    </section>
+
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>

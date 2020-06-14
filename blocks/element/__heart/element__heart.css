@@ -1,0 +1,7 @@
+.element__heart {
+  margin: 0;
+  margin-top: 6px;
+  width: 21px;
+  height: 18px;
+  object-fit: contain;
+}
