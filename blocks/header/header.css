@@ -1,7 +1,6 @@
 @import url(./__logo/header__logo.css);
 
 .header {
-  position: relative;
   max-width: 882px;
   min-height: 74px;
   margin: auto;

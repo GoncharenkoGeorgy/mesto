@@ -8,7 +8,6 @@
 @import url(./__info-container/profile__info-container.css);
 
 .profile {
-  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

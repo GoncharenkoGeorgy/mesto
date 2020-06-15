@@ -1,5 +1,6 @@
 .element__content {
-  padding: 21px 15px 27px 21px;
+  padding: 22px 15px 28px 21px;
+  margin-top: -4px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
