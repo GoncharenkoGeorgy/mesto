@@ -13,3 +13,9 @@
     padding-top: 28px;
   }
 }
+
+@media screen and (max-width: 330px){
+  .header {
+    min-height: 56px;
+  }
+}
