@@ -83,4 +83,3 @@ function removeClass(classes, removedClassName) {
     })
     .join(" ");
 }
-
