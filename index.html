@@ -24,54 +24,22 @@
             <p class="profile__info-text" id="userProf"></p>
           </div>  
         </div>
-          <button class="profile__add-button"></button>
+          <button class="profile__add-button" id='placeAddButton'></button>
       </section>
 
       <section class="elements-section">
-        <ul class="elements">
-          <li class="element">
-            <img class="element__pic" src="images/karachaevsk.png" alt="Карачаевск">
-            <div class="element__content">
-              <h2 class="element__name">Карачаевск</h2>
-              <button class="element__heart"></button>
-            </div>  
-          </li> 
-          <li class="element">
-            <img class="element__pic" src="images/dombai.png" alt="Карачаевск">
-            <div class="element__content">
-              <h2 class="element__name">Гора Эльбрус</h2>
-              <button class="element__heart"></button>
-            </div> 
-          </li>
-          <li class="element">
-            <img class="element__pic" src="images/Albrus.png" alt="Карачаевск">
-            <div class="element__content">
-              <h2 class="element__name">Домбай</h2>
-              <button class="element__heart"></button>
-            </div> 
-          </li>
-          <li class="element">
-            <img class="element__pic" src="images/dombai.png" alt="Карачаевск">
-            <div class="element__content">
-              <h2 class="element__name">Гора Эльбрус</h2>
-              <button class="element__heart"></button>
-            </div>           
-          </li>
-          <li class="element">
-            <img class="element__pic" src="images/Albrus.png" alt="Карачаевск">
-            <div class="element__content">
-              <h2 class="element__name">Домбай</h2>
-              <button class="element__heart"></button>
-            </div>           
-          </li>
-          <li class="element">
-            <img class="element__pic" src="images/karachaevsk.png" alt="Карачаевск">
-            <div class="element__content">
-              <h2 class="element__name">Карачаево-Черкессия</h2>
-              <button class="element__heart"></button>
-            </div>           
-          </li>
-        </ul> 
+        <ul class="elements" id="cardsListElement">
+          <template class="card-template">
+            <li class="element">
+              <img class="element__pic">
+              <button class="element__remove"></button>
+              <div class="element__content">
+                <h2 class="element__name"></h2>
+                <button class="element__heart" id="like"></button>
+              </div>  
+            </li>
+          </template>
+        </ul>
       </section>  
     </main>
     
@@ -94,6 +62,31 @@
         </div>  
       </div>
     </section>
+
+    <section class="popup" id="popupTwo">
+      <div class="popup__container">
+        <button class="popup__close" id="popupCloseTwo"></button>
+        <div class="popup__content">
+          <h2 class="popup__heading">Новое место</h2>
+          <form>  
+            <fieldset class="popup__fields">
+              <input class="popup__input" type="text" name="heading" placeholder="Название" required id="nameNewPlace">
+              <input class="popup__input" type="text" name="subheading" placeholder="Ссылка на картинку" required id="linkNewPlace">
+            </fieldset>
+            <button class="popup__save" id="popupSaveTwo" type="button">Создать</button>  
+          </form>
+        </div>  
+      </div>
+    </section>
+
+    <section class="popup" id="popupCard">  <!-- Крестик и подпись еще доделываю -->
+      <figure class="element__container">
+        <button class="popup__close" id="placeClose"></button>
+        <img class="element__pic element__pic_active" id="placePic">
+        <figcaption class="element__name" id="placeName"></figcaption>
+      </figure>
+    </section>
+
   </div>
   <script src="index.js"></script>
 </body>

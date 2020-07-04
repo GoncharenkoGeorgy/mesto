@@ -1,0 +1,19 @@
+.element__remove {
+  position: absolute;
+  margin-top: 18px;
+  margin-left: -33px;
+  border: none;
+  cursor: pointer;
+  min-width: 18px;
+  height: 19px; 
+  background-color: inherit;
+  box-shadow: none;
+  object-fit: contain;
+  background-repeat: no-repeat;
+  background-image: url(../../../images/remove.svg);
+}
+
+.element__remove:hover {
+  opacity: 0.6; 
+  transition: 0.2s linear 0.1s;
+}
