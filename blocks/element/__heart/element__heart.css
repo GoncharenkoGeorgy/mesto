@@ -13,11 +13,6 @@
   background-image: url(../../../images/heart.svg);
 }
 
-.element__heart:hover {
-  background-image: url(../../../images/hearthover.png);
-  transition: 0.2s linear 0.2s;
-} 
-
 .element__heart:focus {
   outline: none;
 }

@@ -18,27 +18,18 @@
           <img class="profile__avatar" src="images/kusto.png" alt="Жак-Ив Кусто">
           <div class="profile__info-container">
             <div class="profile__info">
-              <h1 class="profile__info-heading" id="userName"></h1>
-              <button class="profile__info-edit" id="profileEditButton"></button>     
+              <h1 class="profile__info-heading"></h1>
+              <button class="profile__info-edit"></button>     
             </div>  
-            <p class="profile__info-text" id="userProf"></p>
+            <p class="profile__info-text"></p>
           </div>  
         </div>
-          <button class="profile__add-button" id='placeAddButton'></button>
+          <button class="profile__add-button popup-add-place"></button>
       </section>
 
       <section class="elements-section">
-        <ul class="elements" id="cardsListElement">
-          <template class="card-template">
-            <li class="element">
-              <img class="element__pic">
-              <button class="element__remove"></button>
-              <div class="element__content">
-                <h2 class="element__name"></h2>
-                <button class="element__heart" id="like"></button>
-              </div>  
-            </li>
-          </template>
+        <ul class="elements">
+          
         </ul>
       </section>  
     </main>
@@ -47,47 +38,59 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
 
-    <section class="popup" id="popup">
+    <section class="popup">
       <div class="popup__container">
-        <button class="popup__close" id="popupClose"></button>
+        <button class="popup__close popup-edit-close"></button>
         <div class="popup__content">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <form>  
+          <form class="popup-form">  
             <fieldset class="popup__fields">
-              <input class="popup__input" type="text" name="heading" placeholder="Имя" required id="userNameInput">
-              <input class="popup__input" type="text" name="subheading" placeholder="Род деятельности" required id="userProfInput">
+              <input class="popup__input popup-user-name" type="text" name="heading" placeholder="Имя" required>
+              <input class="popup__input popup-user-prof" type="text" name="subheading" placeholder="Род деятельности" required>
             </fieldset>
-            <button class="popup__save" id="popupSave" type="button">Сохранить</button>  
+            <button class="popup__save popup-edit-save">Сохранить</button>  
           </form>
         </div>  
       </div>
     </section>
 
-    <section class="popup" id="popupTwo">
+    <section class="popup popup-add">
       <div class="popup__container">
-        <button class="popup__close" id="popupCloseTwo"></button>
+        <button class="popup__close popup-add-close"></button>
         <div class="popup__content">
           <h2 class="popup__heading">Новое место</h2>
-          <form>  
+          <form class="popup-add-form">  
             <fieldset class="popup__fields">
-              <input class="popup__input" type="text" name="heading" placeholder="Название" required id="nameNewPlace">
-              <input class="popup__input" type="text" name="subheading" placeholder="Ссылка на картинку" required id="linkNewPlace">
+              <input class="popup__input popup-new-place" type="text" name="heading" placeholder="Название" required>
+              <input class="popup__input popup-link-place" type="text" name="subheading" placeholder="Ссылка на картинку" required>
             </fieldset>
-            <button class="popup__save" id="popupSaveTwo" type="button">Создать</button>  
+            <button class="popup__save popup-add-save">Создать</button>  
           </form>
         </div>  
       </div>
     </section>
 
-    <section class="popup" id="popupCard">  <!-- Крестик и подпись еще доделываю -->
+    <section class="popup popup-card"> 
       <figure class="element__container">
-        <button class="popup__close" id="placeClose"></button>
-        <img class="element__pic element__pic_active" id="placePic">
-        <figcaption class="element__name" id="placeName"></figcaption>
+        <button class="popup__close popup-pic-close"></button>
+        <img class="element__pic element__pic_active element-pic-full">
+        <figcaption class="element__name element-name-full"></figcaption>
       </figure>
     </section>
 
+    <template class="card-template">
+      <li class="element">
+        <img class="element__pic">
+        <button class="element__remove"></button>
+        <div class="element__content">
+          <h2 class="element__name"></h2>
+          <button class="element__heart"></button>
+        </div>  
+      </li>
+    </template>
+
   </div>
-  <script src="index.js"></script>
+  <script src="js/initialcards.js"></script>
+  <script src="js/index.js"></script>
 </body>
 </html>
