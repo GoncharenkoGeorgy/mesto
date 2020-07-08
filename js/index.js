@@ -3,17 +3,19 @@ let userProf = "Исследователь океана";
 
 const userNameInput = document.querySelector('.popup-user-name');
 const userProfInput = document.querySelector('.popup-user-prof');
+const userNameBlock = document.querySelector('.profile__info-heading');
+const userProfBlock = document.querySelector('.profile__info-text');
 //попапы
 const profileEditButton = document.querySelector('.profile__info-edit');
 const popupCloseButton = document.querySelector('.popup-edit-close');
 const popupSaveButton = document.querySelector('.popup-edit-save');
-const popupForm = document.querySelector('.popup-form');
+const popupEditForm = document.querySelector('.popup-form');
 const popupAddForm = document.querySelector('.popup-add-form');
 const placeAddButton = document.querySelector('.popup-add-place');
 const popupTwoCloseButton = document.querySelector('.popup-add-close');
 const popupTwoSaveButton = document.querySelector('.popup-add-save');
 const popupAddCard = document.querySelector('.popup-add');
-const popup = document.querySelector('.popup');
+const popupProfile = document.querySelector('.popup-edit');
 //для карточек
 const cardsListElement = document.querySelector ('.elements');
 const cardTemplateElement = document.querySelector('.card-template');
@@ -22,19 +24,22 @@ const placeClose = document.querySelector('.popup-pic-close');
 const popupCard = document.querySelector('.popup-card');
 const nameActive = document.querySelector('.element-name-full');
 
+const newPlace= document.querySelector('.popup-new-place');
+const linkPlace = document.querySelector('.popup-link-place');
+
 
   setUserInfo();
   
   profileEditButton.addEventListener('click', function(e){
     setUserInputInfo(); 
-    openPopup(popup);
+    openPopup(popupProfile);
   });
 
   popupCloseButton.addEventListener('click', function() { 
-    removePopup(popup);
+    removePopup(popupProfile);
   });
 
-  popupForm.addEventListener('submit', function(e) {
+  popupEditForm.addEventListener('submit', function(e) {
 
     e.preventDefault();
 
@@ -42,14 +47,14 @@ const nameActive = document.querySelector('.element-name-full');
     userProf = userProfInput.value;
 
     setUserInfo();
-    removePopup(popup);
+    removePopup(popupProfile);
   });
   
   // добавл места
   placeAddButton.addEventListener('click', function(e){
     
-    document.querySelector('.popup-new-place').value =''; 
-    document.querySelector('.popup-link-place').value ='';
+    newPlace.value = '';
+    linkPlace.value = '';
 
     openPopup(popupAddCard);
   });
@@ -62,8 +67,9 @@ const nameActive = document.querySelector('.element-name-full');
 
     e.preventDefault();
 
-    const name = document.querySelector('.popup-new-place').value;
-    const link = document.querySelector('.popup-link-place').value;
+
+    const name = newPlace.value;
+    const link = linkPlace.value;
 
     addCard({name, link}); 
     removePopup(popupAddCard); 
@@ -75,9 +81,6 @@ function setUserInputInfo() {
 }
 
 function setUserInfo() {
-  const userNameBlock = document.querySelector('.profile__info-heading');
-  const userProfBlock = document.querySelector('.profile__info-text');
-
   userNameBlock.textContent = userName;
   userProfBlock.textContent = userProf;
 }
