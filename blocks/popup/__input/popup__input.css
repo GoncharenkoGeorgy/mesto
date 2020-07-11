@@ -1,11 +1,22 @@
 .popup__input {
-  margin-bottom: 30px;
+  margin-top: 30px;
   border: none;
   width: 100%;
   padding-bottom: 13px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;  
+}
+/*
+.popup__input:invalid {
+  border-bottom: 1px solid #f00;
+  opacity: 1;
+}
+
+.popup__input:valid {
+  color: rgba(0, 0, 0, 1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }

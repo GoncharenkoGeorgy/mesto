@@ -6,6 +6,9 @@
 @import url(./__heading/popup__heading.css);
 @import url(./__input/popup__input.css);
 @import url(./__save/popup__save.css);
+@import url(./__input/_type/_error/popup__input_type_error.css);
+@import url(./__input-error/_active/popup__input-error_active.css);
+@import url(./__save/_disabled/popup__save_disabled.css);
 
 .popup {
   position: fixed;

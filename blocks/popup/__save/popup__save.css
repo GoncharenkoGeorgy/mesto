@@ -1,20 +1,33 @@
 .popup__save {
-  background-color: black;
   color: white;
-  margin: 18px 0 36px;
+  margin: 48px 0 36px;
   width: 100%;
-  border-radius: 2px;
   min-height: 50px;
-  border: none;
-  box-shadow: none;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
   cursor: pointer;
+  background-color: #000;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 2px;      
 }
 
 .popup__save:hover {
   background: rgba(0, 0, 0, 0.8);
   transition: 0.2s linear 0.1s;
+}
+/*
+.popup__save:invalid {
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.popup__save:valid {
+  background: #000000;
+  border-radius: 2px;
+  color: white;
+  opacity: 1;
 }

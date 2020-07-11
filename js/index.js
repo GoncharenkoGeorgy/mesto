@@ -9,7 +9,7 @@ const userProfBlock = document.querySelector('.profile__info-text');
 const profileEditButton = document.querySelector('.profile__info-edit');
 const popupCloseButton = document.querySelector('.popup-edit-close');
 const popupSaveButton = document.querySelector('.popup-edit-save');
-const popupEditForm = document.querySelector('.popup-form');
+const popupEditForm = document.querySelector('.popup-edit-form');
 const popupAddForm = document.querySelector('.popup-add-form');
 const placeAddButton = document.querySelector('.popup-add-place');
 const popupTwoCloseButton = document.querySelector('.popup-add-close');
@@ -43,6 +43,11 @@ const linkPlace = document.querySelector('.popup-link-place');
 
     e.preventDefault();
 
+    const inputList = Array.from(document.querySelector('.popup-edit-form').querySelectorAll('.popup__input'));
+    if (hasInvalidInput(inputList)){
+      return; 
+    }
+
     userName = userNameInput.value;
     userProf = userProfInput.value;
 
@@ -66,6 +71,11 @@ const linkPlace = document.querySelector('.popup-link-place');
   popupAddForm.addEventListener('submit', function(e) {
 
     e.preventDefault();
+
+    const inputList = Array.from(document.querySelector('.popup-add-form').querySelectorAll('.popup__input'));
+    if (hasInvalidInput(inputList)){
+      return; 
+    }
 
 
     const name = newPlace.value;
@@ -154,4 +164,29 @@ function popupActiveName(isPopupOpen) {
   //подпись картинки
   placeClose.addEventListener('click', function() { 
     popupActiveName(false);
+  });
+
+  // Закрытие попапа Esc
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+    removePopup(popupProfile);
+    removePopup(popupAddCard);
+    removePopup(popupCard);
+    }
+  });
+  
+  // Мышкой
+  
+  document.addEventListener('mousedown', function(e) {
+    
+    const openedPopup = document.querySelector('.popup_opened');
+
+    if(!openedPopup) 
+      return;
+    
+    const openPopupContainer = openedPopup.querySelector('.popup-mouse');
+
+    if(!openPopupContainer.contains(e.target))
+      removePopup(openedPopup);   
   });
