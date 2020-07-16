@@ -1,69 +1,84 @@
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  
-  inputElement.classList.add('popup__input_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__save_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+  fieldSelector: '.popup__field',
 };
 
-const hideInputError = (formElement, inputElement) => {
+const showInputError = (formElement, inputElement, errorMessage, config) => {
+  
+  const {inputErrorClass, errorClass} = config;
+  //находим элемент ошибки по id поля ввода, к которому она относится
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  
+  inputElement.classList.add(config.inputErrorClass);
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add(config.errorClass);
+};
+
+const hideInputError = (formElement, inputElement, config) => {
+
+  const {inputErrorClass, errorClass} = config;
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.classList.remove(config.errorClass);
   errorElement.textContent = '';
 };
 
 const isValid = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, config);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, config);
   }
 };
 
+function toggleButtonState(inputList, buttonElement) {
+
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__save_disabled');
+    buttonElement.setAttribute("disabled", true);
+} else {
+    buttonElement.classList.remove('popup__save_disabled');
+    buttonElement.removeAttribute("disabled");
+  }
+}
+
 function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save');
-    toggleButtonState(inputList, buttonElement);
+
+  const {inputSelector, submitButtonSelector} = config;
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   inputList.forEach((inputElement) => {
   inputElement.addEventListener('input', function () {
     isValid(formElement, inputElement);
-    toggleButtonState(inputList, buttonElement);
+    toggleButtonState(inputList, buttonElement, config);
   });
 });
 }
 
-function enableValidation () {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
-  
-  formList.forEach(function (formElement) {
-    formElement.addEventListener('submit', function (evt) {
+function enableValidation(config) {
+
+  const {formSelector} = config;
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    
-    const fieldsetList = Array.from(formElement.querySelectorAll('.popup__fields'));
-
-    fieldsetList.forEach((fieldSet) => {
-    setEventListeners(fieldSet);
-});
-
+    setEventListeners(formElement);
   });
 }
 
-enableValidation();
+enableValidation(config);
 
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
   return !inputElement.validity.valid;
   });
-}
-
-function toggleButtonState(inputList, buttonElement) {
-  if (hasInvalidInput(inputList)) {
-  buttonElement.classList.add('popup__save_disabled');
-} else {
-  buttonElement.classList.remove('popup__save_disabled');
-}
 }

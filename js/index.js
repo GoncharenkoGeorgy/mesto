@@ -16,6 +16,8 @@ const popupTwoCloseButton = document.querySelector('.popup-add-close');
 const popupTwoSaveButton = document.querySelector('.popup-add-save');
 const popupAddCard = document.querySelector('.popup-add');
 const popupProfile = document.querySelector('.popup-edit');
+const popup_opened = document.querySelector('.popup_opened');
+
 //для карточек
 const cardsListElement = document.querySelector ('.elements');
 const cardTemplateElement = document.querySelector('.card-template');
@@ -31,58 +33,62 @@ const linkPlace = document.querySelector('.popup-link-place');
   setUserInfo();
   
   profileEditButton.addEventListener('click', function(e){
+
+    clearFormProfile (popupProfile, config);
+
     setUserInputInfo(); 
     openPopup(popupProfile);
+
+    const formElement = document.querySelector('.popup__form');
+    const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+    const buttonElement = formElement.querySelector('.popup__save');
+    toggleButtonState(inputList, buttonElement, config);
   });
 
   popupCloseButton.addEventListener('click', function() { 
-    removePopup(popupProfile);
+    closePopup(popupProfile);
   });
 
   popupEditForm.addEventListener('submit', function(e) {
 
     e.preventDefault();
 
-    const inputList = Array.from(document.querySelector('.popup-edit-form').querySelectorAll('.popup__input'));
-    if (hasInvalidInput(inputList)){
-      return; 
-    }
-
     userName = userNameInput.value;
     userProf = userProfInput.value;
 
     setUserInfo();
-    removePopup(popupProfile);
+    closePopup(popupProfile);
   });
   
   // добавл места
   placeAddButton.addEventListener('click', function(e){
+
+    clearAddForm (popupAddCard, config);
     
     newPlace.value = '';
     linkPlace.value = '';
 
     openPopup(popupAddCard);
+
+    const formElement = document.querySelector('.popup-add-form');
+    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+    const buttonElement = formElement.querySelector('.popup__save');
+    toggleButtonState(inputList, buttonElement);
   });
 
   popupTwoCloseButton.addEventListener('click', function() { 
-    removePopup(popupAddCard);
+    closePopup(popupAddCard);
   });
 
   popupAddForm.addEventListener('submit', function(e) {
 
     e.preventDefault();
 
-    const inputList = Array.from(document.querySelector('.popup-add-form').querySelectorAll('.popup__input'));
-    if (hasInvalidInput(inputList)){
-      return; 
-    }
-
-
     const name = newPlace.value;
     const link = linkPlace.value;
 
     addCard({name, link}); 
-    removePopup(popupAddCard); 
+    closePopup(popupAddCard);
   });
 
 function setUserInputInfo() {
@@ -95,21 +101,14 @@ function setUserInfo() {
   userProfBlock.textContent = userProf;
 }
 
-function openPopup(popup){
-  popup.classList.add('popup_opened');
-}
-
-function removePopup(popup){
-  popup.classList.remove('popup_opened');
-}
-
 // Рендерим кард
 function addCard(card) {
   const cardContainer = cardTemplateElement.content.cloneNode(true);
+  const elementPic = cardContainer.querySelector('.element__pic');
 
   cardContainer.querySelector('.element__name').textContent = card.name;
-  cardContainer.querySelector('.element__pic').src = card.link;
-  cardContainer.querySelector('.element__pic').alt = card.name;
+  elementPic.src = card.link;
+  elementPic.alt = card.name;
 
   //для удаления
   cardContainer.querySelector('.element__remove').addEventListener('click', removeCard);
@@ -118,7 +117,7 @@ function addCard(card) {
   cardContainer.querySelector('.element__heart').addEventListener('click', likeCard);
 
   //картинкафул
-  cardContainer.querySelector('.element__pic').addEventListener('click', () => {
+  elementPic.addEventListener('click', () => {
     const openPic = document.querySelector('.element-pic-full');
     
     openPic.src = card.link;
@@ -158,7 +157,7 @@ function popupActiveName(isPopupOpen) {
 
   //закрываем фул картинку
   placeClose.addEventListener('click', function() { 
-    removePopup(popupCard);
+    closePopup(popupCard);
   });
 
   //подпись картинки
@@ -166,27 +165,67 @@ function popupActiveName(isPopupOpen) {
     popupActiveName(false);
   });
 
-  // Закрытие попапа Esc
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-    removePopup(popupProfile);
-    removePopup(popupAddCard);
-    removePopup(popupCard);
+  const closeEsc = (evt) => {
+    if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
     }
-  });
-  
-  // Мышкой
-  
-  document.addEventListener('mousedown', function(e) {
-    
+  };
+
+  const setCloseEsc = () => {
+    document.addEventListener('keydown', closeEsc);
+  }
+
+  const removeCloseEsc = () => {
+    document.removeEventListener('keydown', closeEsc);
+  }
+
+  const closeMouse = (evt) => {
     const openedPopup = document.querySelector('.popup_opened');
 
-    if(!openedPopup) 
-      return;
-    
-    const openPopupContainer = openedPopup.querySelector('.popup-mouse');
+      if (evt.target.classList.contains('popup_opened')) {
+        closePopup(openedPopup);
+      }
+  };
 
-    if(!openPopupContainer.contains(e.target))
-      removePopup(openedPopup);   
-  });
+  const setCloseMouse = () => {
+    document.addEventListener('mousedown', closeMouse);
+  }
+
+  const removeCloseMouse = () => {
+    document.removeEventListener('mousedown', closeMouse);
+  }
+
+  function openPopup(popup){
+    popup.classList.add('popup_opened');
+    setCloseEsc();
+    setCloseMouse();
+}
+  
+  function closePopup(popup){
+    popup.classList.remove('popup_opened');
+    removeCloseEsc();
+    removeCloseMouse();
+  }
+
+  const clearFormProfile = function(popup, config) {
+    
+    const formElement = document.querySelector('.popup__form');
+    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+    inputList.forEach((inputElement) => {
+      hideInputError(formElement, inputElement, config);
+        inputElement.value = '';
+    });
+  }
+
+  const clearAddForm = function(popup, config) {
+    
+    const formElement = document.querySelector('.popup-add-form');
+    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+    inputList.forEach((inputElement) => {
+      hideInputError(formElement, inputElement, config);
+        inputElement.value = '';
+    });
+  }
+
+  
