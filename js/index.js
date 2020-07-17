@@ -16,7 +16,6 @@ const popupTwoCloseButton = document.querySelector('.popup-add-close');
 const popupTwoSaveButton = document.querySelector('.popup-add-save');
 const popupAddCard = document.querySelector('.popup-add');
 const popupProfile = document.querySelector('.popup-edit');
-const popup_opened = document.querySelector('.popup_opened');
 
 //для карточек
 const cardsListElement = document.querySelector ('.elements');
@@ -34,15 +33,12 @@ const linkPlace = document.querySelector('.popup-link-place');
   
   profileEditButton.addEventListener('click', function(e){
 
-    clearFormProfile (popupProfile, config);
+    clear(popupEditForm, config);
 
     setUserInputInfo(); 
     openPopup(popupProfile);
 
-    const formElement = document.querySelector('.popup__form');
-    const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-    const buttonElement = formElement.querySelector('.popup__save');
-    toggleButtonState(inputList, buttonElement, config);
+    toggleButtonState(popupEditForm, config); 
   });
 
   popupCloseButton.addEventListener('click', function() { 
@@ -63,17 +59,13 @@ const linkPlace = document.querySelector('.popup-link-place');
   // добавл места
   placeAddButton.addEventListener('click', function(e){
 
-    clearAddForm (popupAddCard, config);
+    clear(popupAddForm, config); 
     
     newPlace.value = '';
     linkPlace.value = '';
 
     openPopup(popupAddCard);
 
-    const formElement = document.querySelector('.popup-add-form');
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    const buttonElement = formElement.querySelector('.popup__save');
-    toggleButtonState(inputList, buttonElement);
   });
 
   popupTwoCloseButton.addEventListener('click', function() { 
@@ -155,13 +147,9 @@ function popupActiveName(isPopupOpen) {
     nameActive.classList.remove("element__name_active");  
 }
 
-  //закрываем фул картинку
+  //закрываем фул картинку и подпись картинки
   placeClose.addEventListener('click', function() { 
     closePopup(popupCard);
-  });
-
-  //подпись картинки
-  placeClose.addEventListener('click', function() { 
     popupActiveName(false);
   });
 
@@ -172,14 +160,6 @@ function popupActiveName(isPopupOpen) {
     }
   };
 
-  const setCloseEsc = () => {
-    document.addEventListener('keydown', closeEsc);
-  }
-
-  const removeCloseEsc = () => {
-    document.removeEventListener('keydown', closeEsc);
-  }
-
   const closeMouse = (evt) => {
     const openedPopup = document.querySelector('.popup_opened');
 
@@ -188,44 +168,14 @@ function popupActiveName(isPopupOpen) {
       }
   };
 
-  const setCloseMouse = () => {
-    document.addEventListener('mousedown', closeMouse);
-  }
-
-  const removeCloseMouse = () => {
-    document.removeEventListener('mousedown', closeMouse);
-  }
-
   function openPopup(popup){
     popup.classList.add('popup_opened');
-    setCloseEsc();
-    setCloseMouse();
+    document.addEventListener('keydown', closeEsc);
+    document.addEventListener('mousedown', closeMouse);
 }
   
   function closePopup(popup){
     popup.classList.remove('popup_opened');
-    removeCloseEsc();
-    removeCloseMouse();
+    document.removeEventListener('keydown', closeEsc);
+    document.removeEventListener('mousedown', closeMouse);
   }
-
-  const clearFormProfile = function(popup, config) {
-    
-    const formElement = document.querySelector('.popup__form');
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    inputList.forEach((inputElement) => {
-      hideInputError(formElement, inputElement, config);
-        inputElement.value = '';
-    });
-  }
-
-  const clearAddForm = function(popup, config) {
-    
-    const formElement = document.querySelector('.popup-add-form');
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    inputList.forEach((inputElement) => {
-      hideInputError(formElement, inputElement, config);
-        inputElement.value = '';
-    });
-  }
-
-  
