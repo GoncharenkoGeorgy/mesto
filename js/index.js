@@ -1,6 +1,6 @@
+import { cards } from './initialCards.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { cards } from './initialCards.js';
 import { popupCard, openPopup, closePopup } from './popup.js';
 
 let userName = "Жак-Ив Кусто";
