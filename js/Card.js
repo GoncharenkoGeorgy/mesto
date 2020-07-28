@@ -1,4 +1,4 @@
-import { popupCard, openPopup, } from './popup.js';
+import { popupCard, openPopup } from './popup.js';
 
 export {Card}
 
