@@ -1,6 +1,6 @@
 import { popupCard, openPopup } from './popup.js';
 
-export {Card}
+export { Card }
 
 class Card {
   constructor(name, link, cardSelector) {
@@ -17,10 +17,11 @@ class Card {
 
   generateCard = () => {
     this._element = this._getTemplate();
+    const elementPic = this._element.querySelector('.element__pic');
 
     this._element.querySelector('.element__name').textContent = this._name;
-    this._element.querySelector('.element__pic').src = this._link;
-    this._element.querySelector('.element__pic').alt = this._name;
+    elementPic.src = this._link;
+    elementPic.alt = this._name;
 
     this._setEventListeners();
     return this._element;
@@ -29,14 +30,15 @@ class Card {
   _openPic = () => {
     const openPic = document.querySelector('.element-pic-full');
     const nameActive = document.querySelector('.element-name-full');
-    
+
     openPic.src = this._link;
-    nameActive.textContent = this._name; 
+    nameActive.textContent = this._name;
     openPic.alt = this._name;
   }
 
   _deleteCard = () => {
     this._element.remove();
+    this._element = null;
   }
 
   _likeCard = () => {
@@ -46,25 +48,25 @@ class Card {
   _popupActiveName = (isPopupOpen) => {
     const nameActive = document.querySelector('.element-name-full');
 
-    if (isPopupOpen) 
+    if (isPopupOpen)
       nameActive.classList.add('element__name_active');
-    else 
-      nameActive.classList.remove("element__name_active");  
-    }
+    else
+      nameActive.classList.remove("element__name_active");
+  }
 
   _setEventListeners() {
     this._element.querySelector('.element__pic').addEventListener('click', () => {
-        this._openPic();
-        openPopup(popupCard);
-        this._popupActiveName(true);
+      this._openPic();
+      openPopup(popupCard);
+      this._popupActiveName(true);
     })
 
     this._element.querySelector('.element__remove').addEventListener('click', () => {
-        this._deleteCard();
+      this._deleteCard();
     })
 
     this._element.querySelector('.element__heart').addEventListener('click', () => {
-        this._likeCard();
+      this._likeCard();
     })
   }
 }

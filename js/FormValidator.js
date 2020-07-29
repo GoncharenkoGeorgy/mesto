@@ -1,4 +1,4 @@
-export {FormValidator}
+export { FormValidator }
 
 class FormValidator {
   constructor(config, formElement) {

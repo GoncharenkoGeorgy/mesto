@@ -4,7 +4,7 @@ import { FormValidator } from './FormValidator.js';
 import { popupCard, openPopup, closePopup } from './popup.js';
 
 let userName = "Жак-Ив Кусто";
-let userProf = "Исследователь океана"; 
+let userProf = "Исследователь океана";
 
 const userNameInput = document.querySelector('.popup-user-name');
 const userProfInput = document.querySelector('.popup-user-prof');
@@ -20,8 +20,11 @@ const popupTwoCloseButton = document.querySelector('.popup-add-close');
 const popupAddCard = document.querySelector('.popup-add');
 const popupProfile = document.querySelector('.popup-edit');
 
-const newPlace= document.querySelector('.popup-new-place');
+const newPlace = document.querySelector('.popup-new-place');
 const linkPlace = document.querySelector('.popup-link-place');
+
+const elements = document.querySelector('.elements');
+const closePic = document.querySelector('.popup-pic-close');
 
 const config = {
   formSelector: '.popup__form',
@@ -33,24 +36,27 @@ const config = {
   fieldSelector: '.popup__field'
 };
 
+const formValidatorEdit = new FormValidator(config, popupEditForm);
+const formValidatorAdd = new FormValidator(config, popupAddForm);
+formValidatorEdit.enableValidation();
+formValidatorAdd.enableValidation();
+
 setUserInfo();
-  
-profileEditButton.addEventListener('click', function(e){
+
+profileEditButton.addEventListener('click', function (e) {
 
   setUserInputInfo();
 
-  const formValidator = new FormValidator(config, popupEditForm);
-  formValidator.enableValidation();
-  formValidator.clear();
-  
+  formValidatorEdit.clear();
+
   openPopup(popupProfile);
 });
 
-  popupCloseButton.addEventListener('click', function() { 
-    closePopup(popupProfile);
-  });
+popupCloseButton.addEventListener('click', function () {
+  closePopup(popupProfile);
+});
 
-popupEditForm.addEventListener('submit', function(e) {
+popupEditForm.addEventListener('submit', function (e) {
 
   e.preventDefault();
 
@@ -60,25 +66,23 @@ popupEditForm.addEventListener('submit', function(e) {
   setUserInfo();
   closePopup(popupProfile);
 });
-  
-  // добавл места
-placeAddButton.addEventListener('click', function(e){
-    
+
+// добавл места
+placeAddButton.addEventListener('click', function (e) {
+
   newPlace.value = "";
   linkPlace.value = "";
-  
-  const formValidator = new FormValidator(config, popupAddForm);
-  formValidator.enableValidation();
-  formValidator.clear();
-  
+
+  formValidatorAdd.clear();
+
   openPopup(popupAddCard);
 });
 
-popupTwoCloseButton.addEventListener('click', function() { 
+popupTwoCloseButton.addEventListener('click', function () {
   closePopup(popupAddCard);
 });
 
-popupAddForm.addEventListener('submit', function(e) {
+popupAddForm.addEventListener('submit', function (e) {
 
   e.preventDefault();
 
@@ -87,7 +91,7 @@ popupAddForm.addEventListener('submit', function(e) {
 
   const card = new Card(name, link, '.card-template');
   const cardElement = card.generateCard();
-  document.querySelector('.elements').prepend(cardElement);
+  elements.prepend(cardElement);
 
   closePopup(popupAddCard);
 });
@@ -102,12 +106,12 @@ function setUserInfo() {
   userProfBlock.textContent = userProf;
 }
 
-cards.forEach(({name, link}) => {
+cards.forEach(({ name, link }) => {
   const card = new Card(name, link, '.card-template');
   const cardElement = card.generateCard();
-  document.querySelector('.elements').prepend(cardElement);
+  elements.prepend(cardElement);
 });
 
-document.querySelector('.popup-pic-close').addEventListener('click', () => {
+closePic.addEventListener('click', () => {
   closePopup(popupCard);
 })
