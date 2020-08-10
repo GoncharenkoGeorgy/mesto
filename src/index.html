@@ -2,7 +2,6 @@
 <html lang="ru">    
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="pages/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mesto</title>
 </head>
@@ -45,9 +44,9 @@
           <h2 class="popup__heading">Редактировать профиль</h2>
           <form class="popup__form popup-edit-form" novalidate>  
             <fieldset class="popup__fields">
-              <input id="name-input" class="popup__input popup-user-name" type="text" name="heading" placeholder="Имя" minlength="2" maxlength="40" required>
+              <input id="name-input" class="popup__input popup-user-name" type="text" name="userName" placeholder="Имя" minlength="2" maxlength="40" required>
               <span id="name-input-error" class="popup__input-error"></span>
-              <input id="prof-input" class="popup__input popup-user-prof" type="text" name="subheading" placeholder="Род деятельности" minlength="2" maxlength="200" required>
+              <input id="prof-input" class="popup__input popup-user-prof" type="text" name="userProf" placeholder="Род деятельности" minlength="2" maxlength="200" required>
               <span id="prof-input-error" class="popup__input-error"></span>
               <button class="popup__save popup-edit-save">Сохранить</button> 
             </fieldset>
@@ -63,9 +62,9 @@
           <h2 class="popup__heading">Новое место</h2>
           <form class="popup__form popup-add-form" novalidate>  
             <fieldset class="popup__fields">
-              <input id="text-input" class="popup__input popup-new-place" type="text" name="heading" placeholder="Название" minlength="1" maxlength="30" required>
+              <input id="text-input" class="popup__input popup-new-place" type="text" name="name" placeholder="Название" minlength="1" maxlength="30" required>
               <span id="text-input-error" class="popup__input-error"></span>
-              <input id="url-input" class="popup__input popup-link-place" type="url" name="subheading" placeholder="Ссылка на картинку" required>
+              <input id="url-input" class="popup__input popup-link-place" type="url" name="link" placeholder="Ссылка на картинку" required>
               <span id="url-input-error" class="popup__input-error"></span>
               <button class="popup__save popup-add-save popup__save_disabled" disabled>Создать</button>  
             </fieldset>
@@ -94,6 +93,5 @@
     </template>
   </div>
   
-  <script type="module" src="./js/index.js"></script>
 </body>
 </html>

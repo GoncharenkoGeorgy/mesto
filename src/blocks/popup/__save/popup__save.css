@@ -18,16 +18,3 @@
   background: rgba(0, 0, 0, 0.8);
   transition: 0.2s linear 0.1s;
 }
-/*
-.popup__save:invalid {
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 2px;
-}
-
-.popup__save:valid {
-  background: #000000;
-  border-radius: 2px;
-  color: white;
-  opacity: 1;
-}

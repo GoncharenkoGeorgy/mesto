@@ -1,0 +1,40 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "В данном проекте нам необходимо сверстать [макет из Figma](https://www.figma.com/file/XNaGNEZD5NEjeyJzAT4gMb/JavaScript.-Sprint-6?node-id=0%3A1&viewport=475%2C-1006%2C0.5613868236541748). Для этого нам понадобятся знания \r Css и HTML. Помимо этого нам необходимо дабавить интерактивности на наш сайт:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rd /s /q dist && webpack",
+    "dev": "webpack-dev-server --watch --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoncharenkoGeorgy/mesto.git"
+  },
+  "author": "Georgy Goncharenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoncharenkoGeorgy/mesto/issues"
+  },
+  "homepage": "https://github.com/GoncharenkoGeorgy/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "autoprefixer": "^9.8.6",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^4.2.1",
+    "cssnano": "^4.1.10",
+    "file-loader": "^6.0.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.10.0",
+    "postcss-loader": "^3.0.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {}
+}
