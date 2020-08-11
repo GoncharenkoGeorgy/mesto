@@ -1,11 +1,11 @@
-export{Section}
+export { Section }
 
 class Section {
   constructor({ items, renderer }, containerSelector) {
-      this._initialArray = items;
-      this._renderer = renderer;
+    this._initialArray = items;
+    this._renderer = renderer;
 
-      this._container = document.querySelector(containerSelector);
+    this._container = document.querySelector(containerSelector);
   }
 
   renderItems() {
@@ -15,6 +15,6 @@ class Section {
   }
 
   addItem(element) {
-    this._container.append(element);
+    this._container.prepend(element);
   }
 }

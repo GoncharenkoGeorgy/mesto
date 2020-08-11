@@ -1,13 +1,13 @@
-import {Popup} from './Popup.js';
+import { Popup } from './Popup.js';
 
-export {PopupWithImage}
+export { PopupWithImage }
 
 class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
   }
 
-  openPopup({name, link}) {
+  openPopup({ name, link }) {
     const openPic = this._element.querySelector('.element-pic-full');
     const nameActive = this._element.querySelector('.element-name-full');
 

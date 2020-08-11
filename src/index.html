@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru">    
+<html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mesto</title>
 </head>
+
 <body>
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="images/Vectorll.svg" alt="Mesto"> 
+      <img class="header__logo" src="images/Vectorll.svg" alt="Mesto">
     </header>
 
     <main class="content">
@@ -18,21 +20,21 @@
           <div class="profile__info-container">
             <div class="profile__info">
               <h1 class="profile__info-heading"></h1>
-              <button class="profile__info-edit"></button>     
-            </div>  
+              <button class="profile__info-edit"></button>
+            </div>
             <p class="profile__info-text"></p>
-          </div>  
+          </div>
         </div>
-          <button class="profile__add-button popup-add-place"></button>
+        <button class="profile__add-button popup-add-place"></button>
       </section>
 
       <section class="elements-section">
         <ul class="elements">
-          
+
         </ul>
-      </section>  
+      </section>
     </main>
-    
+
     <footer class="footer">
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
@@ -42,16 +44,18 @@
         <button class="popup__close popup-edit-close"></button>
         <div class="popup__content">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <form class="popup__form popup-edit-form" novalidate>  
+          <form class="popup__form popup-edit-form" novalidate>
             <fieldset class="popup__fields">
-              <input id="name-input" class="popup__input popup-user-name" type="text" name="userName" placeholder="Имя" minlength="2" maxlength="40" required>
+              <input id="name-input" class="popup__input popup-user-name" type="text" name="userName" placeholder="Имя"
+                minlength="2" maxlength="40" required>
               <span id="name-input-error" class="popup__input-error"></span>
-              <input id="prof-input" class="popup__input popup-user-prof" type="text" name="userProf" placeholder="Род деятельности" minlength="2" maxlength="200" required>
+              <input id="prof-input" class="popup__input popup-user-prof" type="text" name="userProf"
+                placeholder="Род деятельности" minlength="2" maxlength="200" required>
               <span id="prof-input-error" class="popup__input-error"></span>
-              <button class="popup__save popup-edit-save">Сохранить</button> 
+              <button class="popup__save popup-edit-save">Сохранить</button>
             </fieldset>
           </form>
-        </div>  
+        </div>
       </div>
     </section>
 
@@ -60,20 +64,22 @@
         <button class="popup__close popup-add-close"></button>
         <div class="popup__content">
           <h2 class="popup__heading">Новое место</h2>
-          <form class="popup__form popup-add-form" novalidate>  
+          <form class="popup__form popup-add-form" novalidate>
             <fieldset class="popup__fields">
-              <input id="text-input" class="popup__input popup-new-place" type="text" name="name" placeholder="Название" minlength="1" maxlength="30" required>
+              <input id="text-input" class="popup__input popup-new-place" type="text" name="name" placeholder="Название"
+                minlength="1" maxlength="30" required>
               <span id="text-input-error" class="popup__input-error"></span>
-              <input id="url-input" class="popup__input popup-link-place" type="url" name="link" placeholder="Ссылка на картинку" required>
+              <input id="url-input" class="popup__input popup-link-place" type="url" name="link"
+                placeholder="Ссылка на картинку" required>
               <span id="url-input-error" class="popup__input-error"></span>
-              <button class="popup__save popup-add-save popup__save_disabled" disabled>Создать</button>  
+              <button class="popup__save popup-add-save popup__save_disabled" disabled>Создать</button>
             </fieldset>
           </form>
-        </div>  
+        </div>
       </div>
     </section>
 
-    <section class="popup popup-card"> 
+    <section class="popup popup-card">
       <figure class="element__container popup-mouse">
         <button class="popup__close popup-pic-close"></button>
         <img class="element__pic element__pic_active element-pic-full">
@@ -88,10 +94,11 @@
         <div class="element__content">
           <h2 class="element__name"></h2>
           <button class="element__heart"></button>
-        </div>  
+        </div>
       </li>
     </template>
   </div>
-  
+
 </body>
+
 </html>

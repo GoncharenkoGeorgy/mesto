@@ -1,24 +1,17 @@
-import {Popup} from './Popup.js';
+import { Popup } from './Popup.js';
 
-export {PopupWithForm}
+export { PopupWithForm }
 
 class PopupWithForm extends Popup {
-  constructor({popupSelector, handleFormSubmit}) {
+  constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
   }
 
   _getTemplate() {
-  	const formElement = document.querySelector(this._element).content.querySelector('.popup__form').cloneNode(true);
+    const formElement = document.querySelector(this._element).content.querySelector('.popup__form').cloneNode(true);
 
     return formElement;
-  }
-
-  generateForm() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-
-  	return this._element;
   }
 
   setEventListeners() {
@@ -36,10 +29,10 @@ class PopupWithForm extends Popup {
 
   _getInputValues() {
     this._inputList = this._element.querySelectorAll('.popup__input');
-    
+
     this._formValues = {};
     this._inputList.forEach(input => this._formValues[input.name] = input.value);
-    
+
     return this._formValues;
   }
 

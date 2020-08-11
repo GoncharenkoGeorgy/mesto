@@ -24,8 +24,8 @@ class Popup {
 
   _handleMouseClose = (evt) => {
     if (evt.target.classList.contains('popup_opened'))
-        this.closePopup();
-    }
+      this.closePopup();
+  }
 
   setEventListeners() {
     const closePopupButton = this._element.querySelector('.popup__close');

@@ -1,4 +1,4 @@
-export {UserInfo}
+export { UserInfo }
 
 const userNameBlock = document.querySelector('.profile__info-heading');
 const userProfBlock = document.querySelector('.profile__info-text');
@@ -11,12 +11,12 @@ class UserInfo {
   getUserInfo() {
 
     return {
-      userName:this._userName, 
-      userProf:this._userProf
+      userName: this._userName,
+      userProf: this._userProf
     };
   }
 
-  setUserInfo({userName, userProf}) {
+  setUserInfo({ userName, userProf }) {
     this._userName = userName;
     this._userProf = userProf;
 
