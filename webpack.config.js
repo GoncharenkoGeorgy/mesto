@@ -22,20 +22,12 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
-      },
-      {
-        test: /\.(woff2|woff)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        test: /\.(png|jpe?g|gif|woff2|woff|svg)$/i, 
+        use: [ 
+          { 
+            loader: 'file-loader', 
+          }, 
+        ], 
       },
       {
         test: /\.css$/i,
