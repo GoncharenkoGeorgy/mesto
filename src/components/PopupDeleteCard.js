@@ -1,11 +1,11 @@
 import { Popup } from './Popup.js';
+import { Card } from './Card.js';
 
-export { PopupWithForm }
+export { PopupDeleteCard }
 
-class PopupWithForm extends Popup {
-  constructor({ popupSelector, handleFormSubmit }) {
+class PopupDeleteCard extends Popup {
+  constructor( {popupSelector}) {
     super(popupSelector);
-    this._handleFormSubmit = handleFormSubmit;
   }
 
   _getTemplate() {
@@ -19,21 +19,16 @@ class PopupWithForm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
 
-      const data = this._getInputValues();
-      this._handleFormSubmit(data);
+      this._handleSubmit();
 
       this.closePopup();
 
     }); super.setEventListeners();
   }
-  
-  _getInputValues() {
-    this._inputList = this._element.querySelectorAll('.popup__input');
 
-    this._formValues = {};
-    this._inputList.forEach(input => this._formValues[input.name] = input.value);
-
-    return this._formValues;
+  openPopup(handleSubmit) {
+    this._handleSubmit = handleSubmit;
+    super.openPopup();
   }
 
   closePopup() {

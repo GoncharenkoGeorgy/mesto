@@ -8,8 +8,8 @@ class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  renderItems() {
-    this._initialArray.forEach(item => {
+  renderItems(result) {
+    result.forEach(item => {
       this._renderer(item);
     });
   }

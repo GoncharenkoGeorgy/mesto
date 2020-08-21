@@ -4,6 +4,12 @@
   border-radius: 60px;
 }
 
+.profile__avatar:hover {
+  /*background-image: url(../../../images/Editavatar.png);*/
+  opacity: 0.2;
+  
+}
+
 @media screen and (max-width: 710px){
   .profile__avatar {
     

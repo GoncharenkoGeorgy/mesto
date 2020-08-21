@@ -1,11 +1,16 @@
+import { PopupDeleteCard } from './PopupDeleteCard.js';
+
 export { Card }
 
 class Card {
-  constructor({ name, link, handleCardClick }, cardSelector) {
+  constructor({ name, link, handleCardClick, id, deleteCard, likeCard }, cardSelector) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
 
+    this._id = id;
+    this._deleteCard = deleteCard;
+    this._likeCard = likeCard;
     this._handleCardClick = handleCardClick;
   }
 
@@ -27,24 +32,17 @@ class Card {
     return this._element;
   }
 
-  _deleteCard = () => {
+  removeCard = () => {
     this._element.remove();
-    this._element = null;
   }
 
-  _likeCard = () => {
+  plusCard = () => {
     this._element.querySelector('.element__heart').classList.toggle('element__heart_active');
   }
 
   _setEventListeners() {
     this._element.querySelector('.element__pic').addEventListener('click', this._handleCardClick);
-
-    this._element.querySelector('.element__remove').addEventListener('click', () => {
-      this._deleteCard();
-    })
-
-    this._element.querySelector('.element__heart').addEventListener('click', () => {
-      this._likeCard();
-    })
+    this._element.querySelector('.element__remove').addEventListener('click', () => this._deleteCard(this));
+    this._element.querySelector('.element__heart').addEventListener('click', this._likeCard);
   }
 }
