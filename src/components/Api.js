@@ -1,13 +1,3 @@
-//  fetch('https://mesto.nomoreparties.co/v1/cohort-14/cards', {
-//    headers: {
-//      authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b'
-//    }
-//  })
-//    .then(res => res.json())
-//    .then((result) => {
-//      console.log(result);
-//    });
-
 export { Api }
 
 class Api {
@@ -45,28 +35,8 @@ class Api {
     });
   }  
 
-  getCards1() {
-    return fetch(`${this._baseUrl}`, {
-      //method: "GET",
-      headers: this._headers
-    }) 
-    .then(res => res.json())
-    //.then((result) => {
-    //  cards = result;
-    //  console.log(result);
-    //}) 
-    //.then(res => {
-      //if (res.ok) {
-        //return res.json();
-      //} 
-
-      // если ошибка, отклоняем промис
-      //return Promise.reject(`Ошибка: ${res.status}`);
-    //});
-  }
-
-  deleteCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}`, {
+  deleteCard(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: "DELETE",
       headers: this._headers, 
     }) .then(res => {
@@ -79,8 +49,8 @@ class Api {
     });
   }
 
-  likesCard() {
-    return fetch(`${this._baseUrl}/cards/likes/cardId`, {
+  likesCard(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: "PUT",
       headers: this._headers,
       body: JSON.stringify(
@@ -95,8 +65,8 @@ class Api {
     });
   }
 
-  deleteLikesCard() {
-    return fetch(`${this._baseUrl}/cards/likes/cardId`, {
+  deleteLikesCard(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: "DELETE",
       headers: this._headers,
       body: JSON.stringify(

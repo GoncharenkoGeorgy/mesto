@@ -11,6 +11,7 @@
   object-fit: contain;
   background-repeat: no-repeat;
   background-image: url(../../../images/remove.svg);
+  display: none;
 }
 
 .element__remove:hover {

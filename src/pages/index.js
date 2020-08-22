@@ -46,6 +46,14 @@ const formValidatorDelete = new FormValidator(config, popupRemoveCard);
 formValidatorEditAvatar.enableValidation();
 formValidatorDelete.enableValidation();
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+  headers: {
+    authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b',
+    'Content-Type': 'application/json'
+  }
+});
+
 //const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
 
 const openProfile = new PopupWithForm({
@@ -78,10 +86,10 @@ const addingNewCardPopup = new PopupWithForm({
       },
       deleteCard: () => {
         popupDeleteCard.openPopup(() => {
-          api.deleteCard(id)
+          api.deleteCard(_id)
           .then(() => {
-            console.log(id);
-            card.removeCard(id)
+            console.log(_id);
+            card.removeCard(_id)
           });
         })
       },
@@ -92,8 +100,6 @@ const addingNewCardPopup = new PopupWithForm({
     console.log(name, link);
     api.postCard(name, link)
     .then(() =>{
-      //name = name;
-      //link = link;
       cardList.addItem(card.generateCard());
     })
     .catch((err) => console.log(err));    
@@ -116,79 +122,59 @@ const cardList = new Section({
         popupWithImage.openPopup({ name, link });
       },
       deleteCard: (card) => {
-        popupDeleteCard.openPopup(() => card.removeCard());
+        popupDeleteCard.openPopup(() => {
+          api.deleteCard(card._id)
+            .then(() => {
+            console.log(_id);
+            card.removeCard()
+          })
+          .catch((err) => console.log(err));
+        });
       },
       likeCard: () => {
         card.plusCard();
-      } 
+      }, 
+      userId: () => {
+        api.getUserInfo()
+        .then((result) => {
+          userId = result._id;
+        })
+        .catch((err) => console.log(err))  
+      },
+      //ownerId: () => {}
+      //notLikeCard: () => {}
     }, '.card-template'
     );
     cardList.addItem(card.generateCard());
   },
 }, elementsSelector
 );
-//cardList.renderItems();
 
-//api.getCards()
-  //.then(res => res.json())
-  //.then((result) => {
-    //cardList.renderItems(result)
-    //console.log(result) })
-  //.catch((err) => console.log(err))  
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-14/cards', {
-  headers: {
-    authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b'
-  }
-})
-  .then(res => res.json())
+api.getCards()
   .then((result) => {
+    //const owner = result.owner;
+    //const ownerId = result[4].owner._id;
+    //console.log(ownerId);
+
     cardList.renderItems(result);
-    console.log(result);
-  });
+    console.log(result); 
+  })
+  .catch((err) => console.log(err))  
 
 api.getUserInfo()
-   .then((result) => {
-     editAvatar.src = result.avatar;
-     initialUserName = result.name;
-     initialUserProf = result.about;
-     const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
-    
-     userInfo.getUserInfo(result);
-     console.log(result);
-   })
-   .catch((err) => console.log(err))
+  .then((result) => {
+    editAvatar.src = result.avatar;
+    initialUserName = result.name;
+    initialUserProf = result.about;
+    const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
 
-// fetch('https://mesto.nomoreparties.co/v1/cohort-14/users/me', {
-//      headers: {
-//        authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b'
-//      }
-//    })
-//      .then(res => res.json())
-//      .then((result) => {
-//        editAvatar.src = result.avatar;
-//        initialUserName = result.name;
-//        initialUserProf = result.about;
-//        const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
-  
-//        userInfo.getUserInfo(result);
-//        console.log(result);
-//      });
-  
+    //const userId = result._id;
+    //console.log(userId);
 
-
-//api.getCards().then(res => {
-  //console.log(res)
-//})
-
-//api.getCards1()
-  //.then(() => {
-    //cardList.renderItems();
-    //console.log(result);//
-  //})
-  //.catch((err) => console.log(err));
-  //console.log(api.getCards());//
- 
+    userInfo.getUserInfo(result);
+    console.log(result);
+  })
+  .catch((err) => console.log(err))
 
 profileEditButton.addEventListener('click', function (e) {
 
@@ -237,28 +223,3 @@ buttonEditAvatar.addEventListener('click', function(e) {
 
   popupEditAvatar.openPopup();
 })
-
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
-  headers: {
-    authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b',
-    'Content-Type': 'application/json'
-  }
-});
-
-const api1 = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
-  headers: {
-    authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b'
-  }
-});
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-14/cards', {
-//   headers: {
-//     authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
