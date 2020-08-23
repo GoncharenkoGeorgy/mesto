@@ -54,6 +54,37 @@ const api = new Api({
   }
 });
 
+let userId;
+
+api.getUserInfo()
+  .then((result) => {
+    editAvatar.src = result.avatar;
+    initialUserName = result.name;
+    initialUserProf = result.about;
+    const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
+
+    userId = result._id;
+    //console.log(userId);
+
+    userInfo.getUserInfo(result);
+    console.log(result);
+  })
+  .catch((err) => console.log(err))
+
+//let ownerId;
+
+api.getCards()
+  .then((result) => {
+    //const owner = result.owner;
+    //const ownerId = result[4].owner._id;
+    //console.log(owner);
+    //ownerId = result;
+
+    cardList.renderItems(result);
+    console.log(result); 
+  })
+  .catch((err) => console.log(err))   
+
 //const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
 
 const openProfile = new PopupWithForm({
@@ -121,6 +152,7 @@ const cardList = new Section({
       name, link, handleCardClick: () => {
         popupWithImage.openPopup({ name, link });
       },
+      
       deleteCard: (card) => {
         popupDeleteCard.openPopup(() => {
           api.deleteCard(card._id)
@@ -134,47 +166,23 @@ const cardList = new Section({
       likeCard: () => {
         card.plusCard();
       }, 
-      userId: () => {
-        api.getUserInfo()
-        .then((result) => {
-          userId = result._id;
-        })
-        .catch((err) => console.log(err))  
-      },
-      //ownerId: () => {}
-      //notLikeCard: () => {}
+      userId:userId,
+      ownerId:card.owner._id
+      //_id:cards._id
+
+
+      //api.getCards()
+      //.then((result) => owner = result.owner)
+      //_id, 
+    
     }, '.card-template'
     );
     cardList.addItem(card.generateCard());
   },
 }, elementsSelector
 );
-
-api.getCards()
-  .then((result) => {
-    //const owner = result.owner;
-    //const ownerId = result[4].owner._id;
-    //console.log(ownerId);
-
-    cardList.renderItems(result);
-    console.log(result); 
-  })
-  .catch((err) => console.log(err))  
-
-api.getUserInfo()
-  .then((result) => {
-    editAvatar.src = result.avatar;
-    initialUserName = result.name;
-    initialUserProf = result.about;
-    const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
-
-    //const userId = result._id;
-    //console.log(userId);
-
-    userInfo.getUserInfo(result);
-    console.log(result);
-  })
-  .catch((err) => console.log(err))
+//console.log(ownerId);
+//console.log(card); 
 
 profileEditButton.addEventListener('click', function (e) {
 

@@ -1,6 +1,6 @@
 export { cards }
 
-// let cards = [];
+let cards = [];
 
 // function getCards() {
 //     fetch('https://mesto.nomoreparties.co/v1/cohort-14/cards', {
@@ -15,7 +15,7 @@ export { cards }
 // }
 // getCards()
 
-const cards = [];
+//let cards = [];
 
 //  const cards = [
 //      {

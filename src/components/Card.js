@@ -3,7 +3,7 @@ import { PopupDeleteCard } from './PopupDeleteCard.js';
 export { Card }
 
 class Card {
-  constructor({ name, link, handleCardClick, _id, deleteCard, likeCard, notLikeCard, userId, owner}, cardSelector) {
+  constructor({ name, link, handleCardClick, _id, deleteCard, likeCard, notLikeCard, userId, ownerId, likes}, cardSelector) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
@@ -13,7 +13,9 @@ class Card {
     this._notLikeCard = notLikeCard;
     this._handleCardClick = handleCardClick;
     this._userId = userId;
-    this._ownerId = owner
+    this._ownerId = ownerId;
+    this._likes = likes;
+    //console.log(this._likes);
   }
 
   _getTemplate = () => {
@@ -23,9 +25,7 @@ class Card {
   }
 
   getView = () => {
-    //if (this._userId === this._ownerId){
-      this._element.querySelector('.element__remove').classList.toggle('element__remove_active')
-    //}
+      this._element.querySelector('.element__remove').classList.add('element__remove_active')
   }
 
   generateCard = () => {
@@ -35,13 +35,14 @@ class Card {
     this._element.querySelector('.element__name').textContent = this._name;
     elementPic.src = this._link;
     elementPic.alt = this._name;
-    this.owner = this._element.owner; 
 
-    //this._ownerId = this._element.owner;
-    console.log(this._userId);
-    console.log(this._name);
-    console.log(this._ownerId);
-    //this.getView();
+    // if ( === 'e2d15c21cd69ebd8282b9fa2') {
+    //   this.getView();
+    // }
+
+    //console.log(this._id); 
+    //
+    //console.log(this._userId);
 
     this._setEventListeners();
     return this._element;
