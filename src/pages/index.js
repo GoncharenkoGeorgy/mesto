@@ -26,6 +26,11 @@ const placeAddButton = document.querySelector('.popup-add-place');
 
 const newPlace = document.querySelector('.popup-new-place');
 const linkPlace = document.querySelector('.popup-link-place');
+const buttonEditAvatar = document.querySelector('.profile__avatar-button');
+const editAvatar = document.querySelector('.profile__avatar');
+const linkAvatarInput = document.querySelector('.popup-link-avatar');
+const userNameBlock = document.querySelector('.profile__info-heading');
+const userProfBlock = document.querySelector('.profile__info-text');
 
 const config = {
   formSelector: '.popup__form',
@@ -71,7 +76,7 @@ api.getUserInfo()
 const openProfile = new PopupWithForm({
   popupSelector: '.popup-edit',
   handleFormSubmit: (data) => {
-    renderLoading(true);
+    openProfile.renderLoading(true);
     api.updateProfile(data.userName, data.userProf)
       .then(() => {
         const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
@@ -80,7 +85,7 @@ const openProfile = new PopupWithForm({
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        renderLoading(false);
+        openProfile.renderLoading(false);
       });
   }
 });
@@ -95,9 +100,9 @@ popupDeleteCard.setEventListeners();
 const addingNewCardPopup = new PopupWithForm({
   popupSelector: '.popup-add',
   handleFormSubmit: (data) => {
+    addingNewCardPopup.renderLoading(true);
     api.postCard(data)
       .then((data) => {
-        renderLoading(true);
         const card = new Card({
           data, handleCardClick: () => {
             popupWithImage.openPopup(data);
@@ -134,7 +139,7 @@ const addingNewCardPopup = new PopupWithForm({
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        renderLoading(false);
+        addingNewCardPopup.renderLoading(false);
       });
   }
 });
@@ -195,10 +200,6 @@ api.getCards()
   })
   .catch((err) => console.log(err))
 
-const userNameBlock = document.querySelector('.profile__info-heading');
-const userProfBlock = document.querySelector('.profile__info-text');
-
-
 profileEditButton.addEventListener('click', function (e) {
 
   userNameInput.value = userNameBlock.textContent;
@@ -219,21 +220,17 @@ placeAddButton.addEventListener('click', function (e) {
   addingNewCardPopup.openPopup();
 });
 
-const buttonEditAvatar = document.querySelector('.profile__avatar-button');
-const editAvatar = document.querySelector('.profile__avatar');
-const linkAvatarInput = document.querySelector('.popup-link-avatar');
-
 const popupEditAvatar = new PopupWithForm({
   popupSelector: '.popup-edit-avatar',
   handleFormSubmit: ({ link }) => {
-    renderLoading(true);
+    popupEditAvatar.renderLoading(true);
     api.updateAvatar(link)
       .then(() => {
         editAvatar.src = link;
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        renderLoading(false);
+        popupEditAvatar.renderLoading(false);
       });
   }
 });
@@ -247,16 +244,3 @@ buttonEditAvatar.addEventListener('click', function (e) {
 
   popupEditAvatar.openPopup();
 })
-
-const notLoad = document.querySelector('.popup__save_loading');
-const defVal = document.querySelector('.popup__save_default');
-
-function renderLoading(isLoading) {
-  if (isLoading) {
-    notLoad.classList.add('popup__save_loading_active');
-    defVal.classList.add('popup__save_default_active');
-  } else {
-    notLoad.classList.remove('popup__save_loading_active');
-    defVal.classList.remove('popup__save_default_active');
-  }
-}

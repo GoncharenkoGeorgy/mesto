@@ -39,4 +39,17 @@ class PopupWithForm extends Popup {
   closePopup() {
     super.closePopup();
   }
+
+  renderLoading(isLoading) {
+    const notLoad = this._element.querySelector('.popup__save_loading');
+    const defVal = this._element.querySelector('.popup__save_default');
+
+    if (isLoading) {
+      notLoad.classList.add('popup__save_loading_active');
+      defVal.classList.add('popup__save_default_active');
+    } else {
+      notLoad.classList.remove('popup__save_loading_active');
+      defVal.classList.remove('popup__save_default_active');
+    }
+  }
 }
