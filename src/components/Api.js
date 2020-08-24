@@ -10,36 +10,36 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
-    }) 
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
 
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
   }
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
-    }) 
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
 
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
-  }  
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+  }
 
   deleteCard(_id) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: "DELETE",
-      headers: this._headers, 
-    }) .then(res => {
+      headers: this._headers,
+    }).then(res => {
       if (res.ok) {
         return res.json();
       }
@@ -49,13 +49,11 @@ class Api {
     });
   }
 
-  likesCard(id) {
+  likedCard(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: "PUT",
       headers: this._headers,
-      body: JSON.stringify(
-      ) 
-    }) .then(res => {
+    }).then(res => {
       if (res.ok) {
         return res.json();
       }
@@ -65,13 +63,11 @@ class Api {
     });
   }
 
-  deleteLikesCard(id) {
+  deleteLikedCard(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: "DELETE",
       headers: this._headers,
-      body: JSON.stringify(
-      ) 
-    }) .then(res => {
+    }).then(res => {
       if (res.ok) {
         return res.json();
       }
@@ -81,15 +77,13 @@ class Api {
     });
   }
 
-  postCard(name, link) {
+  postCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({
-        name, link
-      }
-      ) 
-    }) .then(res => {
+      body: JSON.stringify(data
+      )
+    }).then(res => {
       if (res.ok) {
         return res.json();
       }
@@ -105,9 +99,9 @@ class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(
-        {avatar}
-      ) 
-    }) .then(res => {
+        { avatar }
+      )
+    }).then(res => {
       if (res.ok) {
         return res.json();
       }
@@ -117,26 +111,23 @@ class Api {
     });
   }
 
-//up profile
-updateProfile(name, about) {
-  return fetch(`${this._baseUrl}/users/me`, {
-    method: "PATCH",
-    headers: this._headers,
-    body: JSON.stringify({
-      name,
-      about
-    }) 
-  }) .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    // если ошибка, отклоняем промис
+  //up profile
+  updateProfile(name, about) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about
+      })
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      // если ошибка, отклоняем промис
       return Promise.reject(`Ошибка: ${res.status}`);
     });
-  }  
-
-  
-
+  }
 }
 
 // const api = new Api({

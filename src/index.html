@@ -16,7 +16,8 @@
     <main class="content">
       <section class="profile">
         <div class="profile__content">
-          <button class="profile__avatar-button"><img class="profile__avatar" src="images/kusto.png" alt="Жак-Ив Кусто"></button>
+          <button class="profile__avatar-button"><img class="profile__avatar" src="images/kusto.png"
+              alt="Жак-Ив Кусто"></button>
           <div class="profile__info-container">
             <div class="profile__info">
               <h1 class="profile__info-heading"></h1>
@@ -52,7 +53,10 @@
               <input id="prof-input" class="popup__input popup-user-prof" type="text" name="userProf"
                 placeholder="Род деятельности" minlength="2" maxlength="200" required>
               <span id="prof-input-error" class="popup__input-error"></span>
-              <button class="popup__save popup-edit-save">Сохранить</button>
+              <button class="popup__save popup-edit-save">
+                <div class="popup__save_loading">Сохранение...</div>
+                <div class="popup__save_default">Сохранить</div>
+              </button>
             </fieldset>
           </form>
         </div>
@@ -72,7 +76,10 @@
               <input id="url-input" class="popup__input popup-link-place" type="url" name="link"
                 placeholder="Ссылка на картинку" required>
               <span id="url-input-error" class="popup__input-error"></span>
-              <button class="popup__save popup-add-save popup__save_disabled" disabled>Создать</button>
+              <button class="popup__save popup-add-save popup__save_disabled" disabled>
+                <div class="popup__save_loading">Сохранение...</div>
+                <div class="popup__save_default">Создать</div>
+              </button>
             </fieldset>
           </form>
         </div>
@@ -97,7 +104,10 @@
               <input id="url-input" class="popup__input popup-link-avatar" type="url" name="link"
                 placeholder="Ссылка на аватарку" required>
               <span id="url-input-error" class="popup__input-error"></span>
-              <button class="popup__save popup-edit-save" disabled>Сохранить</button>
+              <button class="popup__save popup-edit-save" disabled>
+                <div class="popup__save_loading">Сохранение...</div>
+                <div class="popup__save_default">Сохранить</div>
+              </button>
             </fieldset>
           </form>
         </div>
@@ -110,7 +120,7 @@
         <div class="popup__content">
           <h2 class="popup__heading">Вы уверены?</h2>
           <form class="popup__form popup-delete-card-form" novalidate>
-              <button class="popup__save popup-edit-save">Да</button>
+            <button class="popup__save popup-edit-save">Да</button>
             </fieldset>
           </form>
         </div>
@@ -126,7 +136,7 @@
           <div class="element__counter">
             <button class="element__heart"></button>
             <p class="element__heart-counter">0</p>
-          </div>  
+          </div>
         </div>
       </li>
     </template>

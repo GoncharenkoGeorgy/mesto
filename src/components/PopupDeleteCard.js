@@ -1,10 +1,9 @@
 import { Popup } from './Popup.js';
-import { Card } from './Card.js';
 
 export { PopupDeleteCard }
 
 class PopupDeleteCard extends Popup {
-  constructor( {popupSelector}) {
+  constructor({ popupSelector }) {
     super(popupSelector);
   }
 

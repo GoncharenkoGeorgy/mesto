@@ -9,6 +9,10 @@
 @import url(./__input/_type/_error/popup__input_type_error.css);
 @import url(./__input-error/_active/popup__input-error_active.css);
 @import url(./__save/_disabled/popup__save_disabled.css);
+@import url(./_loading/popup__save_loading.css);
+@import url(./_loading/_active/popup__save_loading_active.css);
+@import url(./_default/popup__save_default.css);
+@import url(./_default/_active/popup__save_default_active.css);
 
 .popup {
   position: fixed;

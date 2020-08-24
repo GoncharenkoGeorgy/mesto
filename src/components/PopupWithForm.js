@@ -26,7 +26,7 @@ class PopupWithForm extends Popup {
 
     }); super.setEventListeners();
   }
-  
+
   _getInputValues() {
     this._inputList = this._element.querySelectorAll('.popup__input');
 

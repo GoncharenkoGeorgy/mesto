@@ -2,8 +2,6 @@ export { UserInfo }
 
 const userNameBlock = document.querySelector('.profile__info-heading');
 const userProfBlock = document.querySelector('.profile__info-text');
-const editAvatar = document.querySelector('.profile__avatar');
-const linkAvatarInput = document.querySelector('.popup-link-avatar');
 
 class UserInfo {
   constructor(data) {
@@ -25,8 +23,4 @@ class UserInfo {
     userNameBlock.textContent = this._userName;
     userProfBlock.textContent = this._userProf;
   }
-
-  //getLinkavatar() {
-    //editAvatar.src = linkAvatarInput.value;
-  //}
 }
