@@ -1,26 +1,23 @@
 export { UserInfo }
 
-const userNameBlock = document.querySelector('.profile__info-heading');
-const userProfBlock = document.querySelector('.profile__info-text');
-
 class UserInfo {
-  constructor(data) {
-    this.setUserInfo(data);
+  constructor(userName, userInfo, userAvatar) {
+    this._userName = document.querySelector(userName);
+    this._userInfo = document.querySelector(userInfo);
+    this._userAvatar = document.querySelector(userAvatar);
   }
 
   getUserInfo() {
-
-    return {
-      userName: this._userName,
-      userProf: this._userProf
-    };
+    const userInfo = {};
+    userInfo.name = this._userName.textContent;
+    userInfo.about = this._userInfo.textContent;
+    userInfo.avatar = this._userAvatar.src;
+    return userInfo;
   }
 
-  setUserInfo({ userName, userProf }) {
-    this._userName = userName;
-    this._userProf = userProf;
-
-    userNameBlock.textContent = this._userName;
-    userProfBlock.textContent = this._userProf;
+  setUserInfo(data) {
+    this._userName.textContent = data.name;
+    this._userInfo.textContent = data.about;
+    this._userAvatar.src = data.avatar;
   }
 }

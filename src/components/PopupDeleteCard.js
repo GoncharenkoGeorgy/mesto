@@ -7,12 +7,6 @@ class PopupDeleteCard extends Popup {
     super(popupSelector);
   }
 
-  _getTemplate() {
-    const formElement = document.querySelector(this._element).content.querySelector('.popup__form').cloneNode(true);
-
-    return formElement;
-  }
-
   setEventListeners() {
     this._form = this._element.querySelector('.popup__form');
     this._form.addEventListener('submit', (evt) => {
@@ -25,12 +19,7 @@ class PopupDeleteCard extends Popup {
     }); super.setEventListeners();
   }
 
-  openPopup(handleSubmit) {
+  setSubmitHandler(handleSubmit) {
     this._handleSubmit = handleSubmit;
-    super.openPopup();
-  }
-
-  closePopup() {
-    super.closePopup();
   }
 }

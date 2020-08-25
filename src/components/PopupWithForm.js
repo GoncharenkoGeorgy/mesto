@@ -21,9 +21,6 @@ class PopupWithForm extends Popup {
 
       const data = this._getInputValues();
       this._handleFormSubmit(data);
-
-      this.closePopup();
-
     }); super.setEventListeners();
   }
 

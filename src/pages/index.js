@@ -9,9 +9,6 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Section } from '../components/Section.js';
 import '../pages/index.css';
 
-let initialUserName = "";
-let initialUserProf = "";
-
 const userNameInput = document.querySelector('.popup-user-name');
 const userProfInput = document.querySelector('.popup-user-prof');
 
@@ -27,10 +24,7 @@ const placeAddButton = document.querySelector('.popup-add-place');
 const newPlace = document.querySelector('.popup-new-place');
 const linkPlace = document.querySelector('.popup-link-place');
 const buttonEditAvatar = document.querySelector('.profile__avatar-button');
-const editAvatar = document.querySelector('.profile__avatar');
 const linkAvatarInput = document.querySelector('.popup-link-avatar');
-const userNameBlock = document.querySelector('.profile__info-heading');
-const userProfBlock = document.querySelector('.profile__info-text');
 
 const config = {
   formSelector: '.popup__form',
@@ -61,15 +55,18 @@ const api = new Api({
 
 let userId;
 
+const userName = '.profile__info-heading';
+const userProf = '.profile__info-text';
+const userAvatar = '.profile__avatar';
+
+
+const infoAboutUser = new UserInfo(userName, userProf, userAvatar);
+
 api.getUserInfo()
   .then((result) => {
-    editAvatar.src = result.avatar;
-    initialUserName = result.name;
-    initialUserProf = result.about;
-    const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
+    infoAboutUser.setUserInfo(result);
 
     userId = result._id;
-    userInfo.getUserInfo(result);
   })
   .catch((err) => console.log(err))
 
@@ -78,10 +75,9 @@ const openProfile = new PopupWithForm({
   handleFormSubmit: (data) => {
     openProfile.renderLoading(true);
     api.updateProfile(data.userName, data.userProf)
-      .then(() => {
-        const userInfo = new UserInfo({ userName: initialUserName, userProf: initialUserProf });
-
-        userInfo.setUserInfo(data);
+      .then((data) => {
+        infoAboutUser.setUserInfo(data);
+        openProfile.closePopup();
       })
       .catch((err) => console.log(err))
       .finally(() => {
@@ -97,45 +93,53 @@ const popupDeleteCard = new PopupDeleteCard({
 });
 popupDeleteCard.setEventListeners();
 
+function addCard(data) {
+  const card = new Card({
+    data, handleCardClick: () => {
+      popupWithImage.openPopup(data);
+    },
+
+    deleteCard: (card) => {
+      popupDeleteCard.openPopup();
+      popupDeleteCard.setSubmitHandler(() => {
+        api.deleteCard(data._id)
+          .then(() => {
+            card.removeCard()
+          })
+          .catch((err) => console.log(err));
+      })
+    },
+    handleLikeCard: (evt) => {
+      if (evt.target.classList.contains('element__heart_active')) {
+        api.deleteLikedCard(data._id)
+          .then((res) => {
+            card.likesCard(evt)
+            card.isLikes(res.likes);
+          })
+          .catch((err) => console.log(err))
+      } else {
+        api.likedCard(data._id)
+          .then((res) => {
+            card.likesCard(evt),
+              card.isLikes(res.likes);
+          })
+          .catch((err) => console.log(err))
+      }
+    },
+    userId: userId,
+  }, '.card-template'
+  );
+  cardList.addItem(card.generateCard());
+}
+
 const addingNewCardPopup = new PopupWithForm({
   popupSelector: '.popup-add',
   handleFormSubmit: (data) => {
     addingNewCardPopup.renderLoading(true);
     api.postCard(data)
       .then((data) => {
-        const card = new Card({
-          data, handleCardClick: () => {
-            popupWithImage.openPopup(data);
-          },
-          deleteCard: (card) => {
-            popupDeleteCard.openPopup(() => {
-              api.deleteCard(data._id)
-                .then(() => {
-                  card.removeCard()
-                });
-            })
-          },
-          handleLikeCard: (evt) => {
-            if (evt.target.classList.contains('element__heart_active')) {
-              api.deleteLikedCard(data._id)
-                .then((res) => {
-                  card.likesCard(evt)
-                  card.isLikes(res.likes);
-                })
-                .catch((err) => console.log(err))
-            } else {
-              api.likedCard(data._id)
-                .then((res) => {
-                  card.likesCard(evt),
-                    card.isLikes(res.likes);
-                })
-                .catch((err) => console.log(err))
-            }
-          },
-          userId: userId,
-        }, '.card-template');
-
-        cardList.addItem(card.generateCard(data));
+        addCard(data);
+        addingNewCardPopup.closePopup();
       })
       .catch((err) => console.log(err))
       .finally(() => {
@@ -155,41 +159,7 @@ const elementsSelector = '.elements';
 const cardList = new Section({
   items: cards,
   renderer: (data) => {
-    const card = new Card({
-      data, handleCardClick: () => {
-        popupWithImage.openPopup(data);
-      },
-
-      deleteCard: (card) => {
-        popupDeleteCard.openPopup(() => {
-          api.deleteCard(data._id)
-            .then(() => {
-              card.removeCard()
-            })
-            .catch((err) => console.log(err));
-        });
-      },
-      handleLikeCard: (evt) => {
-        if (evt.target.classList.contains('element__heart_active')) {
-          api.deleteLikedCard(data._id)
-            .then((res) => {
-              card.likesCard(evt)
-              card.isLikes(res.likes);
-            })
-            .catch((err) => console.log(err))
-        } else {
-          api.likedCard(data._id)
-            .then((res) => {
-              card.likesCard(evt),
-                card.isLikes(res.likes);
-            })
-            .catch((err) => console.log(err))
-        }
-      },
-      userId: userId,
-    }, '.card-template'
-    );
-    cardList.addItem(card.generateCard());
+    addCard(data);
   },
 }, elementsSelector
 );
@@ -202,8 +172,9 @@ api.getCards()
 
 profileEditButton.addEventListener('click', function (e) {
 
-  userNameInput.value = userNameBlock.textContent;
-  userProfInput.value = userProfBlock.textContent;
+  const userInfo = infoAboutUser.getUserInfo();
+  userNameInput.value = userInfo.name;
+  userProfInput.value = userInfo.about;
 
   formValidatorEdit.clear();
 
@@ -222,11 +193,12 @@ placeAddButton.addEventListener('click', function (e) {
 
 const popupEditAvatar = new PopupWithForm({
   popupSelector: '.popup-edit-avatar',
-  handleFormSubmit: ({ link }) => {
+  handleFormSubmit: (link) => {
     popupEditAvatar.renderLoading(true);
     api.updateAvatar(link)
-      .then(() => {
-        editAvatar.src = link;
+      .then((data) => {
+        infoAboutUser.setUserInfo(data);
+        popupEditAvatar.closePopup();
       })
       .catch((err) => console.log(err))
       .finally(() => {

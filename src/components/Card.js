@@ -62,17 +62,6 @@ class Card {
     });
   }
 
-  upCounter() {
-    this._likes.length = this._likes.length + 1;
-    this._counter.textContent = this._likes.length;
-  }
-
-  getLikes() {
-    this._element = this._getTemplate();
-    const elementHeart = this._element.querySelector('.element__heart');
-    return elementHeart;
-  }
-
   isLikes() {
     if (!this._element.querySelector('.element__heart').classList.contains('element__heart_active')) {
       this._likes.length = this._likes.length - 1;
