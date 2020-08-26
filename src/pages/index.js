@@ -77,11 +77,11 @@ const openProfile = new PopupWithForm({
     api.updateProfile(data.userName, data.userProf)
       .then((data) => {
         infoAboutUser.setUserInfo(data);
+        openProfile.closePopup();
       })
       .catch((err) => console.log(err))
       .finally(() => {
         openProfile.renderLoading(false);
-        openProfile.closePopup();
       });
   }
 });
@@ -102,11 +102,16 @@ function addCard(data) {
     deleteCard: (card) => {
       popupDeleteCard.openPopup();
       popupDeleteCard.setSubmitHandler(() => {
+        popupDeleteCard.renderLoading(true);
         api.deleteCard(data._id)
           .then(() => {
             card.removeCard()
+            popupDeleteCard.closePopup();
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err))
+          .finally(() => {
+            popupDeleteCard.renderLoading(false);
+          });
       })
     },
     handleLikeCard: (evt) => {
@@ -139,11 +144,11 @@ const addingNewCardPopup = new PopupWithForm({
     api.postCard(data)
       .then((data) => {
         addCard(data);
+        addingNewCardPopup.closePopup();
       })
       .catch((err) => console.log(err))
       .finally(() => {
         addingNewCardPopup.renderLoading(false);
-        addingNewCardPopup.closePopup();
       });
   }
 });
@@ -198,11 +203,11 @@ const popupEditAvatar = new PopupWithForm({
     api.updateAvatar(link)
       .then((data) => {
         infoAboutUser.setUserInfo(data);
+        popupEditAvatar.closePopup();
       })
       .catch((err) => console.log(err))
       .finally(() => {
         popupEditAvatar.renderLoading(false);
-        popupEditAvatar.closePopup();
       });
   }
 });

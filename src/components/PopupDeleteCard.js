@@ -14,8 +14,6 @@ class PopupDeleteCard extends Popup {
 
       this._handleSubmit();
 
-      this.closePopup();
-
     }); super.setEventListeners();
   }
 
